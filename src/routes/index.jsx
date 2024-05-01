@@ -1,11 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import About from "@/pages/about/About";
-import JobPage from "@/pages/jobPage/JobPage";
+import Jobs from "@/pages/jobPage/Jobs";
 
 const appRouter = createBrowserRouter([
   {
     path: "/",
-    element: <JobPage />,
+    element: <Jobs />,
   },
   {
     path: "/about",
