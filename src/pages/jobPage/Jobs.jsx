@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Grid, Container } from "@mui/material";
 import Input from "@/components/Input";
 import Select from "@/components/Select";
+import JobCards from "@/pages/jobPage/JobCards";
 
 const Jobs = () => {
   const [role, setRole] = useState([]);
@@ -137,6 +138,7 @@ const Jobs = () => {
           />
         </Grid>
       </Grid>
+      <JobCards />
     </Container>
   );
 };
