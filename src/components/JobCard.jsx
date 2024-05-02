@@ -1,48 +1,202 @@
+import React, { useState } from "react";
 import {
   Card,
   CardContent,
   Typography,
   CardActions,
   Button,
-  Link,
+  Chip,
+  AvatarGroup,
+  Avatar,
 } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
+import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
+import { Link } from "react-router-dom";
+
+const StyledCard = styled(Card)({
+  width: 300,
+  backgroundColor: "#ffffff",
+  borderRadius: "12px",
+  boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+  margin: "20px",
+});
+
+const StyledCardContent = styled(CardContent)({
+  display: "flex",
+  flexDirection: "column",
+  padding: "16px",
+});
+
+const TopRow = styled("div")({
+  display: "flex",
+  flexDirection: "row",
+});
+
+const InfoContainer = styled("div")({
+  display: "flex",
+  flexDirection: "column",
+  marginLeft: "10px",
+});
+
+const CompanyLogo = styled("img")({
+  width: "50px",
+  height: "50px",
+  borderRadius: "50%",
+  marginRight: "10px",
+});
+
+const StyledTypographyTitle = styled(Typography)({
+  fontSize: "1rem",
+  fontWeight: "bold",
+  marginBottom: "0.5rem",
+  color: "#333333",
+});
+
+const StyledTypography = styled(Typography)({
+  fontSize: "0.875rem",
+  marginBottom: "0.5rem",
+  color: "#666666",
+  position: "relative",
+  maxHeight: "100px",
+  overflow: "hidden",
+});
+
+const ContentFade = styled("div")({
+  position: "absolute",
+  bottom: 0,
+  left: 0,
+  width: "100%",
+  height: "50px",
+  backgroundImage: "linear-gradient(transparent, white)",
+});
+const StyledChip = styled(Chip)({
+  maxWidth: "max-content", // Adjusting the width of the chip to be content-based
+  marginBottom: "10px", // Spacing between the chip and the top row
+});
+
+const ApplyButton = styled(Button)({
+  textTransform: "none",
+  backgroundColor: "#40E0D0",
+  color: "white",
+  "&:hover": {
+    backgroundColor: "#38CCCC",
+  },
+  justifyContent: "flex-center",
+  alignItems: "center",
+  marginBottom: "10px",
+});
+
+const ReferralButton = styled(Button)({
+  textTransform: "none",
+  backgroundColor: "#4169E1",
+  color: "white",
+  "&:hover": {
+    backgroundColor: "#375AC8",
+  },
+  justifyContent: "flex-center",
+  alignItems: "center",
+  marginBottom: "10px",
+});
+
+const ViewMoreLink = styled(Link)({
+  cursor: "pointer",
+  color: "#0066cc",
+  textAlign: "center",
+  display: "block",
+  fontWeight: "bold",
+});
 
 const JobCard = ({ job }) => {
-  const salaryRange =
-    job?.minJdSalary && job?.maxJdSalary
-      ? `$${job?.minJdSalary}k - $${job?.maxJdSalary}k`
-      : "Salary not disclosed";
+  const [showFullText, setShowFullText] = useState(false);
+  const toggleShowFullText = () => setShowFullText(!showFullText);
 
   return (
-    <Card sx={{ maxWidth: 345, m: 1 }}>
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {job?.jobRole}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Location: {job?.location}
-        </Typography>
-        <Typography variant="body2">
-          Experience: {job?.minExp} - {job?.maxExp} years
-        </Typography>
-        <Typography variant="body2">Salary: {salaryRange}</Typography>
-        <Typography variant="body1">
-          {job?.jobDetailsFromCompany.slice(0, 100)}...
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button size="small">
-          <Link
-            href={job?.jdLink}
-            target="_blank"
-            rel="noopener"
-            color="inherit"
-          >
-            Learn More
-          </Link>
-        </Button>
+    <StyledCard>
+      <StyledCardContent>
+        <StyledChip
+          icon={<HourglassEmptyIcon />}
+          label="Posted 2 days ago"
+          size="small"
+          variant="outlined"
+        />
+        <TopRow>
+          <CompanyLogo
+            src={
+              job?.companyLogoUrl ||
+              "https://upload.wikimedia.org/wikipedia/en/8/86/Integral_University%2C_Lucknow_logo.png"
+            }
+            alt="Company Logo"
+          />
+          <InfoContainer>
+            <StyledTypographyTitle>
+              {job?.companyName || "Microsoft"}
+            </StyledTypographyTitle>
+            <StyledTypographyTitle>
+              {job?.jobRole || "Software Engineer"}
+            </StyledTypographyTitle>
+            <StyledTypography>
+              {job?.location || "Redmond, WA"}
+            </StyledTypography>
+          </InfoContainer>
+        </TopRow>
+        <StyledTypography style={{ alignSelf: "flex-start" }}>
+          Estimated Salary:{" "}
+          {job?.minJdSalary && job?.maxJdSalary
+            ? `${job.minJdSalary} - ${job.maxJdSalary} LPA`
+            : "Salary not disclosed"}
+        </StyledTypography>
+        <StyledTypographyTitle>About Company:</StyledTypographyTitle>
+        <StyledTypographyTitle style={{ fontSize: "14px" }}>
+          About US
+        </StyledTypographyTitle>
+
+        <StyledTypography
+          style={{
+            position: "relative",
+            maxHeight: showFullText ? "none" : "100px",
+            overflow: "hidden",
+          }}
+        >
+          {job?.companyDescription ||
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."}
+          {!showFullText && <ContentFade />}
+        </StyledTypography>
+        {!showFullText && (
+          <ViewMoreLink onClick={toggleShowFullText}>View More</ViewMoreLink>
+        )}
+        <StyledTypography style={{ alignSelf: "flex-start" }}>
+          Minimum Experience:
+        </StyledTypography>
+        <StyledTypography style={{ alignSelf: "flex-start" }}>
+          {job?.minExperience || "2 years"}
+        </StyledTypography>
+      </StyledCardContent>
+      <CardActions style={{ flexDirection: "column", padding: "0 16px 16px" }}>
+        <ApplyButton fullWidth startIcon={<EmojiEventsIcon />}>
+          Easy Apply
+        </ApplyButton>
+        <ReferralButton
+          fullWidth
+          startIcon={
+            <AvatarGroup max={2}>
+              <Avatar
+                alt="Remy Sharp"
+                src="https://upload.wikimedia.org/wikipedia/en/8/86/Integral_University%2C_Lucknow_logo.png"
+                sx={{ width: 24, height: 24 }}
+              />
+              <Avatar
+                alt="Travis Howard"
+                src="https://upload.wikimedia.org/wikipedia/en/8/86/Integral_University%2C_Lucknow_logo.png"
+                sx={{ width: 24, height: 24 }}
+              />
+            </AvatarGroup>
+          }
+        >
+          Unlock referral asks
+        </ReferralButton>
       </CardActions>
-    </Card>
+    </StyledCard>
   );
 };
 
