@@ -5,8 +5,8 @@ const JobsGrid = ({ jobs }) => {
   return (
     <Container>
       <Grid container spacing={2}>
-        {jobs.map((job) => (
-          <Grid item xs={12} sm={6} md={4} key={job.jdUid}>
+        {jobs.map((job, idx) => (
+          <Grid item xs={12} sm={6} md={4} key={`${job?.jdUid}-${idx}`}>
             <JobCard job={job} />
           </Grid>
         ))}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Card,
   CardContent,
@@ -13,6 +13,7 @@ import { styled } from "@mui/material/styles";
 import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import { Link } from "react-router-dom";
+import { capitalizeFirstLetter } from "@/util/helper";
 
 const StyledCard = styled(Card)({
   width: 300,
@@ -46,7 +47,14 @@ const CompanyLogo = styled("img")({
   marginRight: "10px",
 });
 
-const StyledTypographyTitle = styled(Typography)({
+const StyledTypographyTitle1 = styled(Typography)({
+  fontSize: "1rem",
+  fontWeight: "bold",
+  marginBottom: "0.5rem",
+  color: "#808080",
+});
+
+const StyledTypographyTitle2 = styled(Typography)({
   fontSize: "1rem",
   fontWeight: "bold",
   marginBottom: "0.5rem",
@@ -71,8 +79,8 @@ const ContentFade = styled("div")({
   backgroundImage: "linear-gradient(transparent, white)",
 });
 const StyledChip = styled(Chip)({
-  maxWidth: "max-content", // Adjusting the width of the chip to be content-based
-  marginBottom: "10px", // Spacing between the chip and the top row
+  maxWidth: "max-content",
+  marginBottom: "10px",
 });
 
 const ApplyButton = styled(Button)({
@@ -122,34 +130,38 @@ const JobCard = ({ job }) => {
         />
         <TopRow>
           <CompanyLogo
-            src={
-              job?.companyLogoUrl ||
-              "https://upload.wikimedia.org/wikipedia/en/8/86/Integral_University%2C_Lucknow_logo.png"
-            }
+            src={job?.companyLogoUrl || "https://picsum.photos/200/300"}
             alt="Company Logo"
           />
           <InfoContainer>
-            <StyledTypographyTitle>
-              {job?.companyName || "Microsoft"}
-            </StyledTypographyTitle>
-            <StyledTypographyTitle>
-              {job?.jobRole || "Software Engineer"}
-            </StyledTypographyTitle>
+            <StyledTypographyTitle1>
+              {job?.companyName ||
+                ["Microsoft", "Apple", "Google", "Weekday", "Amazon"][
+                  Math.floor(
+                    Math.random() *
+                      ["Microsoft", "Apple", "Google", "Weekday", "Amazon"]
+                        .length
+                  )
+                ]}
+            </StyledTypographyTitle1>
+            <StyledTypographyTitle2>
+              {capitalizeFirstLetter(job?.jobRole) || "Software Engineer"}
+            </StyledTypographyTitle2>
             <StyledTypography>
-              {job?.location || "Redmond, WA"}
+              {capitalizeFirstLetter(job?.location) || "Redmond, WA"}
             </StyledTypography>
           </InfoContainer>
         </TopRow>
         <StyledTypography style={{ alignSelf: "flex-start" }}>
           Estimated Salary:{" "}
           {job?.minJdSalary && job?.maxJdSalary
-            ? `${job.minJdSalary} - ${job.maxJdSalary} LPA`
+            ? `${job.minJdSalary} - ${job.maxJdSalary} LPA ✅`
             : "Salary not disclosed"}
         </StyledTypography>
-        <StyledTypographyTitle>About Company:</StyledTypographyTitle>
-        <StyledTypographyTitle style={{ fontSize: "14px" }}>
-          About US
-        </StyledTypographyTitle>
+        <StyledTypographyTitle2>About Company:</StyledTypographyTitle2>
+        <StyledTypographyTitle2 style={{ fontSize: "14px" }}>
+          About us
+        </StyledTypographyTitle2>
 
         <StyledTypography
           style={{
@@ -158,7 +170,7 @@ const JobCard = ({ job }) => {
             overflow: "hidden",
           }}
         >
-          {job?.companyDescription ||
+          {job?.jobDetailsFromCompany ||
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."}
           {!showFullText && <ContentFade />}
         </StyledTypography>
@@ -182,12 +194,12 @@ const JobCard = ({ job }) => {
             <AvatarGroup max={2}>
               <Avatar
                 alt="Remy Sharp"
-                src="https://upload.wikimedia.org/wikipedia/en/8/86/Integral_University%2C_Lucknow_logo.png"
+                src="https://picsum.photos/200/300"
                 sx={{ width: 24, height: 24 }}
               />
               <Avatar
                 alt="Travis Howard"
-                src="https://upload.wikimedia.org/wikipedia/en/8/86/Integral_University%2C_Lucknow_logo.png"
+                src="https://picsum.photos/200/300"
                 sx={{ width: 24, height: 24 }}
               />
             </AvatarGroup>

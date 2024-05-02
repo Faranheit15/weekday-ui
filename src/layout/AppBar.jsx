@@ -33,7 +33,7 @@ function ResponsiveAppBar() {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
+  const handleCloseNavMenu = (as) => {
     setAnchorElNav(null);
   };
 
