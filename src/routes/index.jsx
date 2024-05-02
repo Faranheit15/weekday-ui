@@ -4,11 +4,11 @@ import Jobs from "@/pages/jobPage/Jobs";
 
 const appRouter = createBrowserRouter([
   {
-    path: "/",
+    path: "/weekday-ui/",
     element: <Jobs />,
   },
   {
-    path: "/about",
+    path: "/weekday-ui/about",
     element: <About />,
   },
 ]);
