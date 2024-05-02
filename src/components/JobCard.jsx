@@ -20,7 +20,7 @@ const StyledCard = styled(Card)({
   backgroundColor: "#ffffff",
   borderRadius: "12px",
   boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
-  margin: "20px",
+  margin: "5%",
 });
 
 const StyledCardContent = styled(CardContent)({
