@@ -4,7 +4,34 @@ A dashboard made using Weekday's API to display cards about job listings.
 
 ## How to run?
 
-I have hosted the app. Check the link in the description of the repo. However, if you want to clone it, simply fire up a terminal and run <code>npm i</code> in the root directory.
+To get the server running locally:
+
+1. Clone the repo
+   ```bash
+   git clone https://github.com/Faranheit15/weekday-ui.git
+   cd weekday-ui
+   ```
+2. Install the dependencies
+   ```bash
+   npm install
+   # or
+   yarn
+   # or
+   pnpm install
+   # or
+   bun install
+   ```
+3. Run the development server
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   # or
+   pnpm dev
+   # or
+   bun dev
+   ```
+4. Open http://localhost:3000/weekday-ui to view it in the browser.
 
 ## File Structure
 
