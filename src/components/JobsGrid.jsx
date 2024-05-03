@@ -1,5 +1,6 @@
 import { Container, Grid } from "@mui/material";
 import JobCard from "./JobCard";
+import PropTypes from "prop-types";
 
 const JobsGrid = ({ jobs }) => {
   return (
@@ -13,6 +14,10 @@ const JobsGrid = ({ jobs }) => {
       </Grid>
     </Container>
   );
+};
+
+JobsGrid.propTypes = {
+  jobs: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default JobsGrid;

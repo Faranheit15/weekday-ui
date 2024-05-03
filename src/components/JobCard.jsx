@@ -14,13 +14,14 @@ import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import { Link } from "react-router-dom";
 import { capitalizeFirstLetter } from "@/util/helper";
+import PropTypes from "prop-types";
 
 const StyledCard = styled(Card)({
   width: 300,
   backgroundColor: "#ffffff",
   borderRadius: "12px",
   boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
-  margin: "5%",
+  marginTop: "20px",
 });
 
 const StyledCardContent = styled(CardContent)({
@@ -59,6 +60,7 @@ const StyledTypographyTitle2 = styled(Typography)({
   fontWeight: "bold",
   marginBottom: "0.5rem",
   color: "#333333",
+  lineHeight: "0.9",
 });
 
 const StyledTypography = styled(Typography)({
@@ -68,6 +70,7 @@ const StyledTypography = styled(Typography)({
   position: "relative",
   maxHeight: "100px",
   overflow: "hidden",
+  lineHeight: "1.5",
 });
 
 const ContentFade = styled("div")({
@@ -95,8 +98,17 @@ const ApplyButton = styled(Button)({
   marginBottom: "10px",
 });
 
+const StyledCardActions = styled(CardActions)({
+  flexDirection: "column",
+  padding: "0 16px 16px",
+  "& > :not(:first-of-type)": {
+    marginLeft: "0px",
+  },
+});
+
 const ReferralButton = styled(Button)({
   textTransform: "none",
+
   backgroundColor: "#4169E1",
   color: "white",
   "&:hover": {
@@ -113,6 +125,7 @@ const ViewMoreLink = styled(Link)({
   textAlign: "center",
   display: "block",
   fontWeight: "bold",
+  textDecoration: "none",
 });
 
 const JobCard = ({ job }) => {
@@ -184,7 +197,7 @@ const JobCard = ({ job }) => {
           {job?.minExperience || "2 years"}
         </StyledTypography>
       </StyledCardContent>
-      <CardActions style={{ flexDirection: "column", padding: "0 16px 16px" }}>
+      <StyledCardActions>
         <ApplyButton fullWidth startIcon={<EmojiEventsIcon />}>
           Easy Apply
         </ApplyButton>
@@ -207,9 +220,23 @@ const JobCard = ({ job }) => {
         >
           Unlock referral asks
         </ReferralButton>
-      </CardActions>
+      </StyledCardActions>
     </StyledCard>
   );
+};
+
+JobCard.propTypes = {
+  job: PropTypes.shape({
+    companyLogoUrl: PropTypes.string,
+    companyName: PropTypes.string,
+    jobRole: PropTypes.string,
+    jdUid: PropTypes.string,
+    location: PropTypes.string,
+    minJdSalary: PropTypes.number,
+    maxJdSalary: PropTypes.number,
+    jobDetailsFromCompany: PropTypes.string,
+    minExperience: PropTypes.string,
+  }),
 };
 
 export default JobCard;

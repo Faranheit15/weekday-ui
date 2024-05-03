@@ -52,7 +52,7 @@ To get the server running locally:
 <ol>
 <li><strong>Root.jsx: </strong>This is the root page which is the parent of all the other pages. This can be used to run any code, e.g., Context, Redux, Toast, etc., which will be common for all the pages/screens.</li>
 <li><strong>about: </strong>A dummy page added to test the React Router.</li>
-<li><strong>jobPage: </strong>The main page of the app, which displays job listings in the form of cards.</li>
+<li><strong>jobPage: </strong>The main page of the app, which displays job listings in the form of cards. The infinite scroll feature is also implemented on this page/</li>
 </ol>
 <strong>-src/routes:</strong>
 <ol>
